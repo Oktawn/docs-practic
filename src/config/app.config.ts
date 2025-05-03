@@ -8,6 +8,7 @@ interface IAppConfig {
   DB_DATABASE: string;
   DB_EXTERNAL_PORT: number;
   DB_PORT: number;
+  PATH_DOCS: string;
 }
 
 class EnvConfig {
