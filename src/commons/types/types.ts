@@ -15,7 +15,10 @@ type DocsIZType = {
   isVUZ: boolean;
 }
 
+type ProfileStudyingType = "bachelor" | "magistracy";
+
 
 export {
   DocsIZType,
+  ProfileStudyingType
 }

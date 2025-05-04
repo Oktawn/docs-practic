@@ -5,13 +5,21 @@ import PizZip from "pizzip";
 import { resolve } from "node:path";
 import { randomBytes } from "node:crypto";
 import { DocsIZType } from "../commons/types/types";
+import { DocumentsNameEnum } from "../commons/enums/documents.enum";
+import { PracticsStyleEnum, PracticsTypeEnum } from "../commons/enums/practics.enum";
 
 export class DocsWorksService {
 
   async editDoc(body: DocsIZType) {
     var path = resolve(__dirname, envConfig.get("PATH_DOCS"));
     console.log(path);
-    var content = readFileSync(path + "/test_template.docx", "binary");
+    var fileName = "";
+    if (body.isVUZ) {
+      fileName = DocumentsNameEnum.INSTRUCTASH_VUZ;
+    } else {
+      fileName = DocumentsNameEnum.INSTRUCTASH;
+    }
+    var content = readFileSync(path + `/${fileName}`, "binary");
     var zipFile = new PizZip(content);
     var doc = new Docxtemplater(zipFile, { paragraphLoop: true, linebreaks: true });
     doc.render(body);
@@ -20,3 +28,19 @@ export class DocsWorksService {
     writeFileSync(path + `/${fileName}.docx`, buf);
   }
 }
+
+const test = new DocsWorksService();
+test.editDoc({
+  fullName: "Белых Дмитрий",
+  profile: "",
+  specialization: "",
+  groups: "",
+  practicStyle: PracticsStyleEnum.PR,
+  practicType: PracticsTypeEnum.TECH,
+  dateStart: "",
+  dateEnd: "",
+  universityMentor: "",
+  orgPracticeLeader: "",
+  uniDivisionManager: "",
+  isVUZ: false
+})
