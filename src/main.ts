@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import express from 'express';
 import cors from 'cors';
 import { AppDataSource } from './data-source';
-import { envConfig } from './config/app.config';
+import { envConfig } from './config/env.config';
 import { DocsWorksService } from './docsAction/docsWorks.service';
 
 const app = express();

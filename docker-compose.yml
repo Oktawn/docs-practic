@@ -1,5 +1,5 @@
 services:
-  db:
+  db_practic:
     image: postgres
     env_file:
       - .env
@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_DB: ${DB_DATABASE}
     ports:
       - "${DB_EXTERNAL_PORT}:${DB_PORT}"
 
