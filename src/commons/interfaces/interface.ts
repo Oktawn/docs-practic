@@ -6,6 +6,12 @@ interface IAreasStudying {
   type: ProfileStudyingType;
 }
 
+interface IStudentsProfile {
+  id: string;
+  fullName: string;
+  
+}
+
 export {
   IAreasStudying
 }

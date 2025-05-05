@@ -3,6 +3,8 @@ import express from 'express';
 import cors from 'cors';
 import { AppDataSource } from './data-source';
 import { envConfig } from './config/env.config';
+import { DocsWorksService } from './docsAction/docsWorks.service';
+import { PracticsStyleEnum, PracticsTypeEnum } from './commons/enums/practics.enum';
 
 const app = express();
 const port = envConfig.get("API_PORT") || 3000;

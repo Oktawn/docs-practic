@@ -1,4 +1,5 @@
 import { IAreasStudying } from "../interfaces/interface";
+import { ProfileStudyingType } from "../types/types";
 
 export var data: IAreasStudying[] = [
   {
@@ -47,3 +48,15 @@ export var data: IAreasStudying[] = [
     type: "magistracy"
   },
 ]
+
+export function getDataByType(type: ProfileStudyingType) {
+  return data.filter((item) => item.type === type);
+}
+
+export function getDataByProfile(filterData: IAreasStudying[]) {
+  return filterData.filter((item, index, self) => self.indexOf(item) === index);
+}
+
+export function getDataBySpecialization(filterData: IAreasStudying[]) {
+  return filterData.filter((item, index, self) => self.indexOf(item) === index);
+}

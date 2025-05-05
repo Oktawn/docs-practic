@@ -5,7 +5,7 @@ enum PracticsStyleEnum {
 
 enum PracticsTypeEnum {
   STUDY = "Учебная",
-  TECH = "Технологическая",
+  TECH = "Технологическая (проектно-технологическая)",
   DIPLOM = "Преддипломная"
 }
 
