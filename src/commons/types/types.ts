@@ -1,6 +1,6 @@
 import { PracticsStyleEnum, PracticsTypeEnum } from "../enums/practics.enum";
 
-type DocsIZType = {
+type DocsInVUZType = {
   fullName: string;
   shortFullName?: string;
   profileType: ProfileStudyingType;
@@ -11,18 +11,36 @@ type DocsIZType = {
   practicType: PracticsTypeEnum;
   dateStart: string;
   dateEnd: string;
+  isVUZ: boolean;
   universityMentor: string;
   orgPracticeLeader: string;
-  orgName?: string;
-  orgPosition?: string;
   uniDivisionManager?: string;
-  isVUZ: boolean;
 }
+
+type DocsWithoutVUZType = DocsInVUZType & {
+  kyrs: string;
+  orgName: string;
+  orgPosition: string;
+  pricazTUI: string;
+  fullNameOrganiration: string;
+  postDirector: string;
+  directorFullName: string;
+  shortDirector?: string;
+  addressOrganization: string;
+  INN: string;
+  KPP: string;
+  OGRN: string;
+  orgPhone: string;
+  orgEmail: string;
+}
+
+
 
 type ProfileStudyingType = "bachelor" | "magistracy";
 
 
 export {
-  DocsIZType,
+  DocsInVUZType,
+  DocsWithoutVUZType,
   ProfileStudyingType
 }

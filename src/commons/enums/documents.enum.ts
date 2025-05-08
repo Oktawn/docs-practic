@@ -1,10 +1,21 @@
+enum CommonEnum {
+  IZ_BP = "Индивид.задание_ЭБП.docx",
+  IZ = "Индивид.задание.docx",
+}
+
 enum DocumentsNameEnum {
   INSTRUCTASH_VUZ = "Инструктаж_вуз.docx",
+  GRAFIK_VUZ = "График_вуз.docx",
+}
+
+enum DocumentsNameWithoutVUZEnum {
+  DOGOVOR = "Договор.docx",
+  GRAFIK = "График.docx",
   INSTRUCTASH = "Инструктаж.docx",
-  GRAFIK_TECH_VUZ = "График_тех_вуз.docx",
-  GRAFIK_TECH = "График_тех.docx"         
 }
 
 export {
-  DocumentsNameEnum
+  CommonEnum,
+  DocumentsNameEnum,
+  DocumentsNameWithoutVUZEnum,
 }
