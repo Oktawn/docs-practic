@@ -54,6 +54,50 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.practice-form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 90%;
+  padding: 8px 12px;
+  /* border: 1px solid #ddd; */
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.submit-button {
+  background-color: #4e72b8;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.submit-button:hover {
+  background-color: #3a5a99;
+}
+
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

@@ -1,10 +1,10 @@
-import { ProfileStudyingType } from "../types/types";
+import type { ProfileStudyingType } from "../types/docsType";
 
 interface IAreasStudying {
   profile: string;
   specialization: string;
   type: ProfileStudyingType;
 }
-export {
+export type {
   IAreasStudying
 }

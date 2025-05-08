@@ -93,5 +93,7 @@ export class DocsWorksService {
     const fileName = `${file}_${body.shortFullName}`;
 
     await promises.writeFile(`${this.path}/output-files/${fileName}.docx`, buf);
+    return `${this.path}/output-files/${fileName}.docx`;
+
   }
 }
