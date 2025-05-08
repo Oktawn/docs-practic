@@ -21,7 +21,6 @@ type DocsWithoutVUZType = DocsInVUZType & {
   kyrs: string;
   orgName: string;
   orgPosition: string;
-  pricazTUI: string;
   fullNameOrganiration: string;
   postDirector: string;
   directorFullName: string;
