@@ -1,0 +1,14 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 27015,
+      "driver": "PostgreSQL",
+      "database": "dosc_db",
+      "username": "dosc_user",
+      "password": "dosc_password",
+      "name": "docs"
+    }
+  ]
+}

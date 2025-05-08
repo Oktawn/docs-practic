@@ -3,7 +3,6 @@ import { envConfig } from "../config/env.config";
 import Docxtemplater from "docxtemplater";
 import PizZip from "pizzip";
 import { resolve } from "node:path";
-import { randomBytes } from "node:crypto";
 import { DocsInVUZType, DocsWithoutVUZType } from "../commons/types/types";
 import { CommonEnum, DocumentsNameEnum, DocumentsNameWithoutVUZEnum } from "../commons/enums/documents.enum";
 
@@ -37,10 +36,15 @@ export class DocsWorksService {
     body.shortFullName = this.getShortNameStudent(body.fullName);
 
     const templateFiles: string[] = [];
-    const docs = { ...CommonEnum, ...DocumentsNameEnum };
-    Object.entries(docs).forEach(([_, value]) => {
+    if (body.groups.toLowerCase().includes("эбп")) {
+      templateFiles.push(CommonEnum.IZ_BP);
+    } else {
+      templateFiles.push(CommonEnum.IZ);
+    }
+    Object.entries(DocumentsNameEnum).forEach(([_, value]) => {
       templateFiles.push(value);
-    })
+    });
+
     try {
       const res = await Promise.all(templateFiles.map(file => this.processFile(file, body)));
       return res;
@@ -53,16 +57,21 @@ export class DocsWorksService {
   async getDocumentsWithoutVUZ(body: DocsWithoutVUZType) {
     body.shortFullName = this.getShortNameStudent(body.fullName);
     body.shortDirector = this.getShortNameDirector(body.directorFullName);
+
     const templateFiles: string[] = [];
-    const docs = { ...CommonEnum, ...DocumentsNameWithoutVUZEnum };
-    Object.entries(docs).forEach(([_, value]) => {
+    if (body.groups.toLowerCase().includes("эбп")) {
+      templateFiles.push(CommonEnum.IZ_BP);
+    } else {
+      templateFiles.push(CommonEnum.IZ);
+    }
+    Object.entries(DocumentsNameWithoutVUZEnum).forEach(([_, value]) => {
       templateFiles.push(value);
-    })
+    });
+
     try {
       const res = await Promise.all(templateFiles.map(file => this.processFile(file, body)));
       return res;
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Error processing file:", error);
       throw error;
     }
@@ -81,9 +90,8 @@ export class DocsWorksService {
       type: "nodebuffer",
       compression: "DEFLATE"
     });
-    const fileName = randomBytes(10).toString("hex");
+    const fileName = `${file}_${body.shortFullName}`;
 
     await promises.writeFile(`${this.path}/output-files/${fileName}.docx`, buf);
   }
 }
-
