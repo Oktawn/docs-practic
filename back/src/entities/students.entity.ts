@@ -1,6 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { ProfileStudyingType } from '../commons/types/types';
-import { PracticsStyleEnum, PracticsTypeEnum } from '../commons/enums/practics.enum';
 
 @Entity('students')
 export class StudentsEntity {
@@ -11,7 +9,7 @@ export class StudentsEntity {
   fullName: string;
 
   @Column()
-  profileType: ProfileStudyingType;
+  profileType: string;
 
   @Column()
   profile: string;
@@ -19,24 +17,24 @@ export class StudentsEntity {
   @Column()
   specialization: string;
 
-  @Column({ type: 'varchar', nullable: false })
+  @Column()
   groups: string;
 
   @Column({ type: 'varchar', nullable: false })
   kyrs: string;
 
-  @Column({ type: "enum", enum: PracticsStyleEnum, default: PracticsStyleEnum.PR })
-  practicStyle: PracticsStyleEnum;
+  @Column()
+  practicStyle: string;
 
-  @Column({ type: "enum", enum: PracticsTypeEnum, default: PracticsTypeEnum.TECH })
-  practicType: PracticsTypeEnum;
+  @Column()
+  practicType: string;
 
   @Column()
   orgName: string;
 
-  @Column({ type: 'varchar', nullable: false })
+  @Column()
   dateStart: string;
 
-  @Column({ type: 'varchar', nullable: false })
+  @Column()
   dateEnd: string;
 }

@@ -1,10 +1,9 @@
 FROM node
 
 WORKDIR /app
-
 COPY package*.json ./
-RUN npm ci
-
 COPY . .
+RUN npm ci
+RUN npm run build
 
-CMD ["sh", "-c", "npm run migrate && npm run build && npm run start"]
+CMD ["sh", "-c", "npm run start"]

@@ -7,10 +7,11 @@ const config: { [key: string]: Knex.Config } = {
   development: {
     client: "postgresql",
     connection: {
+      host: envConfig.get("DB_HOST"),
       database: envConfig.get("DB_DATABASE"),
       user: envConfig.get('DB_USERNAME'),
       password: envConfig.get("DB_PASSWORD"),
-      port: Number(envConfig.get('DB_EXTERNAL_PORT'))
+      port: Number(envConfig.get("DB_PORT"))
     },
     pool: {
       min: 2,
