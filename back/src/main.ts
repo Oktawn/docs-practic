@@ -4,6 +4,7 @@ import cors from 'cors';
 import { AppDataSource } from './data-source';
 import { envConfig } from './config/env.config';
 import { docsRouter } from './docsWorks/docsWorks.controller';
+import { formatDate, saveStudentToDatabase } from './docsWorks/docsWork.middleware';
 
 const app = express();
 const port = envConfig.get("API_PORT") || 3000;
@@ -11,7 +12,7 @@ const port = envConfig.get("API_PORT") || 3000;
 // Middlewares
 app.use(cors());
 app.use(express.json());
-app.use("/api", docsRouter);
+app.use("/api", formatDate, saveStudentToDatabase, docsRouter);
 
 
 // Database connection and server start

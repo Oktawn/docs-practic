@@ -1,9 +1,6 @@
 import { DataSource } from 'typeorm';
-import dotenv from 'dotenv';
 import { envConfig } from './config/env.config';
 import "reflect-metadata";
-
-dotenv.config();
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -11,7 +8,7 @@ export const AppDataSource = new DataSource({
   username: envConfig.get("DB_USERNAME"),
   password: envConfig.get("DB_PASSWORD"),
   database: envConfig.get("DB_DATABASE"),
-  entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+  entities: [__dirname + '/**/*.entity{.ts,.js}'],
   synchronize: false,
   cache: {
     duration: 10000

@@ -16,6 +16,7 @@ class EnvConfig {
     const envDev = path.resolve(__dirname, "../../.env");
     const envProd = path.resolve(__dirname, "../../../.env");
     const envPath = envDev || envProd;
+    console.log(envPath);
     const { error, parsed } = config({ path: envPath });
     if (error) {
       throw new Error(`Error loading .env file: ${error}`);

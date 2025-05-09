@@ -9,6 +9,7 @@ const url = `http://localhost:3000/api/docs`;
 function PracticeForm() {
   const [isVUZ, setIsVUZ] = useState<boolean>(true);
   const [formData, setFormData] = useState<Partial<DocsInVUZType | DocsWithoutVUZType>>({
+    orgName: "ФГБОУ ВО «ТИУ»",
     isVUZ: true,
     profileType: "bachelor",
   });
@@ -40,11 +41,16 @@ function PracticeForm() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
 
-    if (type === 'checkbox' && e.target instanceof HTMLInputElement) {
-      setFormData(prev => ({ ...prev, [name]: e.target }));
+    if (type === 'checkbox') {
 
-      if (name === 'isVUZ') {
-        setIsVUZ(e.target.checked);
+      if (e.target instanceof HTMLInputElement) {
+        const checked = e.target.checked;
+        setFormData(prev => ({ ...prev, [name]: checked }));
+
+
+        if (name === 'isVUZ') {
+          setIsVUZ(checked);
+        }
       }
     } else {
       setFormData(prev => ({ ...prev, [name]: value }));
@@ -54,7 +60,7 @@ function PracticeForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Submitted data:', formData);
-    
+
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -63,26 +69,25 @@ function PracticeForm() {
         },
         body: JSON.stringify(formData),
       });
-      
+
       if (!response.ok) {
         throw new Error(`Server responded with ${response.status}`);
       }
-      
-      // Обработка скачивания ZIP-файла
+
+
       const blob = await response.blob();
       const downloadUrl = window.URL.createObjectURL(blob);
-      
-      // Создаем временную ссылку и инициируем скачивание
+
+
       const link = document.createElement('a');
       link.href = downloadUrl;
       link.download = `Документы_практики.zip`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      
-      // Очищаем URL объект
+
       window.URL.revokeObjectURL(downloadUrl);
-      
+
       alert("Документы успешно созданы и скачаны");
     } catch (error) {
       console.error('Error:', error);
@@ -177,6 +182,18 @@ function PracticeForm() {
       </div>
 
       <div className="form-group">
+        <label htmlFor="kyrs">Курс</label>
+        <input
+          type="text"
+          id="kyrs"
+          name="kyrs"
+          value={formData.kyrs || ''}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <div className="form-group">
         <label htmlFor="practicStyle">Вид практики</label>
         <select
           id="practicStyle"
@@ -253,6 +270,17 @@ function PracticeForm() {
           required
         />
       </div>
+      <div className="form-group">
+        <label htmlFor="orgPosition">Должность руководителя от организации</label>
+        <input
+          type="text"
+          id="orgPosition"
+          name="orgPosition"
+          value={(formData as Partial<DocsWithoutVUZType>).orgPosition || ''}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
       {isVUZ && (
         <div className="form-group">
@@ -270,19 +298,6 @@ function PracticeForm() {
       {/* Дополнительные поля для практики вне ВУЗа */}
       {!isVUZ && (
         <>
-          <div className="form-group">
-            <label htmlFor="kyrs">Курс</label>
-            <input
-              type="text"
-              id="kyrs"
-              name="kyrs"
-              value={(formData as Partial<DocsWithoutVUZType>).kyrs || ''}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-
           <div className="form-group">
             <label htmlFor="fullNameOrganiration">Полное название организации</label>
             <input
@@ -308,19 +323,20 @@ function PracticeForm() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="orgPosition">Должность в организации</label>
+            <label htmlFor="ystav">Реквизиты документа полномочий организации</label>
             <input
               type="text"
-              id="orgPosition"
-              name="orgPosition"
-              value={(formData as Partial<DocsWithoutVUZType>).orgPosition || ''}
+              id="ystav"
+              name="ystav"
+              value={(formData as Partial<DocsWithoutVUZType>).ystav || ''}
               onChange={handleChange}
               required
             />
           </div>
 
+
           <div className="form-group">
-            <label htmlFor="postDirector">Должность директора</label>
+            <label htmlFor="postDirector">Должность Руководителя</label>
             <input
               type="text"
               id="postDirector"
@@ -332,7 +348,7 @@ function PracticeForm() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="directorFullName"> полное ФИО директора</label>
+            <label htmlFor="directorFullName"> полное ФИО Руководителя</label>
             <input
               type="text"
               id="directorFullName"

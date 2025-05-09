@@ -7,6 +7,7 @@ type DocsInVUZType = {
   profile: string;
   specialization: string;
   groups: string;
+  kyrs: string;
   practicStyle: PracticsStyleEnum;
   practicType: PracticsTypeEnum;
   dateStart: string;
@@ -14,13 +15,13 @@ type DocsInVUZType = {
   isVUZ: boolean;
   universityMentor: string;
   orgPracticeLeader: string;
+  orgPosition: string;
   uniDivisionManager?: string;
 }
 
 type DocsWithoutVUZType = DocsInVUZType & {
-  kyrs: string;
   orgName: string;
-  orgPosition: string;
+  ystav:string;
   fullNameOrganiration: string;
   postDirector: string;
   directorFullName: string;
@@ -32,6 +33,7 @@ type DocsWithoutVUZType = DocsInVUZType & {
   orgPhone: string;
   orgEmail: string;
 }
+
 
 
 

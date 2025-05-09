@@ -1,0 +1,41 @@
+services:
+  db_practic:
+    image: postgres
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - "${DB_EXTERNAL_PORT}:${DB_PORT}"
+
+  back_practic:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    restart: always
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    depends_on:
+      - db_practic
+
+  front_practic:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    restart: always
+    ports:
+      - "${FRONT_PORT}:${FRONT_PORT}"
+    depends_on:
+      - back_practic
+
+volumes:
+  postgres_data:
