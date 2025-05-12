@@ -2,8 +2,8 @@ FROM node
 
 WORKDIR /app
 COPY package*.json ./
-COPY . .
 RUN npm ci
+COPY . .
 RUN npm run build
 
 CMD ["sh", "-c", "npm run start"]
